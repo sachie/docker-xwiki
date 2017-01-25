@@ -35,6 +35,7 @@ services:
     # Provide a name instead of an auto-generated id for the xwiki permanent directory configured in the Dockerfile,
     # to make it simpler to identify in 'docker volume ls'.
     volumes:
+      - tomcat-data:/var/lib/tomcat8
       - xwiki-data:/var/lib/xwiki
   # The container that runs MySQL
   db:
@@ -57,3 +58,4 @@ services:
 volumes:
   mysql-data: {}
   xwiki-data: {}
+  tomcat-data: {}
