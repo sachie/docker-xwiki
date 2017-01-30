@@ -1,4 +1,4 @@
-Provides several full Docker environments for running XWiki.
+Provides several full Docker environments for running XWiki with an automated HTTPS server using Nginx and Let's Encrypt.
 
 The following configurations are currently supported:
 * Two Docker containers with one container for running latest MySQL 5.x database (configured to use UTF8 and be 
