@@ -19,6 +19,19 @@
 # ---------------------------------------------------------------------------
 version: '2'
 services:
+  # The container that runs NGINX and Lets Encrypt
+  portal:
+  image: steveltn/https-portal:1.0.0
+  ports:
+    - '80:80'
+    - '443:443'
+  links:
+    - web
+  restart: always
+  environment:
+    DOMAINS: 'wiki.calcey.net -> http://wiki'
+    STAGE: 'production'
+    
   # The container that runs XWiki + Tomcat
   web:
     build: .
@@ -39,6 +52,7 @@ services:
     volumes:
       - tomcat-data:/var/lib/tomcat8
       - xwiki-data:/var/lib/xwiki
+      
   # The container that runs MySQL
   db:
     image: "mysql:5"
