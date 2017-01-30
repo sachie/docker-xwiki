@@ -21,16 +21,16 @@ version: '2'
 services:
   # The container that runs NGINX and Lets Encrypt
   portal:
-  image: steveltn/https-portal:1.0.0
-  depends_on:
-    - web
-  ports:
-    - '80:80'
-    - '443:443'
-  restart: always
-  environment:
-    DOMAINS: 'wiki.calcey.net -> http://wiki'
-    STAGE: 'production'
+    image: steveltn/https-portal:1.0.0
+    depends_on:
+      - web
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    environment:
+      DOMAINS: 'wiki.calcey.net -> http://wiki'
+      STAGE: 'production'
     
   # The container that runs XWiki + Tomcat
   web:
