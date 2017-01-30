@@ -22,11 +22,11 @@ services:
   # The container that runs NGINX and Lets Encrypt
   portal:
   image: steveltn/https-portal:1.0.0
+  depends_on:
+    - web
   ports:
     - '80:80'
     - '443:443'
-  links:
-    - web
   restart: always
   environment:
     DOMAINS: 'wiki.calcey.net -> http://wiki'
