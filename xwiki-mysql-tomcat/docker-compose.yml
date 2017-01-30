@@ -29,7 +29,7 @@ services:
       - '443:443'
     restart: always
     environment:
-      DOMAINS: 'wiki.calcey.net -> http://wiki'
+      DOMAINS: 'wiki.calcey.net -> http://web'
       STAGE: 'production'
     
   # The container that runs XWiki + Tomcat
