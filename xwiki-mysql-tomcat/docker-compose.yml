@@ -29,7 +29,7 @@ services:
       - '443:443'
     restart: always
     environment:
-      DOMAINS: 'wiki.calcey.net -> http://web'
+      DOMAINS: 'wiki.calcey.net -> http://web:8080'
       STAGE: 'production'
     
   # The container that runs XWiki + Tomcat
@@ -39,6 +39,7 @@ services:
       - db
     ports:
       - "8080:8080"
+    restart: always
     # Default values defined in .env file.
     # The MYSQL_USER/MYSQL_PASSWORD/MYSQL_DATABASE variables are used in the hibernate.cfg.xml file.
     environment:
@@ -61,6 +62,7 @@ services:
     # See https://hub.docker.com/_/mysql/ for more details.
     # - Provide a name instead of an auto-generated id for the mysql data, to make it simpler to identify in
     # 'docker volume ls'
+    restart: always
     volumes:
       - ./mysql/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
       - mysql-data:/var/lib/mysql
