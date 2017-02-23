@@ -18,9 +18,8 @@ The goal is to provide a production-ready XWiki system running in Docker. This w
 
 You should first install [Docker](https://www.docker.com/) on your machine.
 
-* Install Git and run `git clone https://github.com/xwiki-contrib/docker-xwiki.git` or download the sources from
-the GitHub UI.
-* Go to the directory with the configuration file: `cd xwiki-mysql-tomcat`.
+* Clone or download this repository.
+* Navigate to the configs folder: `cd xwiki-mysql-tomcat`.
 * Run `docker-compose up` 
 * Start a browser and point it to `http://localhost:8080`
 
