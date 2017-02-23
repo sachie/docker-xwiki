@@ -18,67 +18,13 @@ The goal is to provide a production-ready XWiki system running in Docker. This w
 
 You should first install [Docker](https://www.docker.com/) on your machine.
 
-Then there are several options:
-
-1. Get the [sources of this project](https://github.com/xwiki-contrib/docker-xwiki) and build them.
-2. Just pull the xwiki image from DockerHub.
-
-## Pulling existing image ##
-
-You need to run 2 containers:
-* One for the XWiki image
-* One for the database image to which XWiki connects to
-
-The simplest is to use the Docker Compose file we provide. Run the following steps:
-* `wget wget https://raw.githubusercontent.com/sachie/docker-xwiki/master/xwiki-mysql-tomcat/docker-compose-using.yml
-`
-  * if you're not using the `latest`tag then use the corresponding GitHub branch/tag. For example for the `8.x` branch: `wget https://raw.githubusercontent.com/sachie/docker-xwiki/8.x/xwiki-mysql-tomcat/docker-compose-using.yml`
-  * You can edit the compose file retrieved to change the default username/password and other environment variables.
-* `docker-compose up`
-
-For reference here's a minimal Docker Compose file using MySQL that you could use as an example (full example
-[here](https://raw.githubusercontent.com/sachie/docker-xwiki/master/xwiki-mysql-tomcat/docker-compose-using.yml)):
-
-```
-version: '2'
-services:
-  web:
-    image: "xwiki/xwiki-mysql-tomcat:latest"
-    depends_on:
-      - db
-    ports:
-      - "8080:8080"
-    volumes:
-      - xwiki-data:/var/lib/xwiki
-    environment:
-      - MYSQL_USER=xwiki
-      - MYSQL_PASSWORD=xwiki
-  db:
-    image: "mysql:5"
-    volumes:
-      - ./mysql/xwiki.cnf:/etc/mysql/conf.d/xwiki.cnf
-      - mysql-data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=xwiki
-      - MYSQL_USER=xwiki
-      - MYSQL_PASSWORD=xwiki
-      - MYSQL_DATABASE=xwiki
-volumes:
-  mysql-data: {}
-  xwiki-data: {}
-```
-
-## Building ##
-
-This allows you to rebuild the XWiki docker image locally. Here are the steps:
-
 * Install Git and run `git clone https://github.com/xwiki-contrib/docker-xwiki.git` or download the sources from
 the GitHub UI. Then choose the branch or tag that you wish to use:
   * The `master`branch will get you the latest released version of XWiki
   * The `8.x` branch will get you the latest released version of XWiki for the 8.x cycle
   * The `8.4.4` tag will get you exactly XWiki 8.4.4.
   * etc.
-* Go the directory corresponding to the configuration you wish to build, for example: `cd xwiki-mysql-tomcat`.
+* Go to the directory corresponding to the configuration you wish to build, for example: `cd xwiki-mysql-tomcat`.
 * Run `docker-compose up` 
 * Start a browser and point it to `http://localhost:8080`
 
@@ -114,18 +60,3 @@ MySQL:
  * Find the container id with `docker ps` 
  * Execute bash in the mysql container: `docker exec -it <containerid> bash -l`
  * Once inside the mysql container execute the `mysql` command: `mysql --user=xwiki --password=xwiki`
-
-# Support
-
-* If you wish to raise an issue or an idea of improvement use [XWiki Docker JIRA project](http://jira.xwiki.org/browse/XDOCKER)
-* If you have questions, use the [XWiki Users Mailing List/Forum](http://dev.xwiki.org/xwiki/bin/view/Community/MailingLists) or use the [XWiki IRC channel](http://dev.xwiki.org/xwiki/bin/view/Community/IRC)
-
-# Contribute
-
-* If you wish to help out on the code, please send Pull Requests on [XWiki Docker GitHub project](https://github.com/xwiki-contrib/docker-xwiki)
-
-# Credits
-
-* Created by Vincent Massol
-* Contributions from Ludovic Dubost, Jean Simard
-* Some code was copied from https://github.com/ThomasSteinbach/docker_xwiki. Thank you Thomas Steinbach
