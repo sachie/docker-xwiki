@@ -11,7 +11,7 @@ All source files are under the LGPL 2.1 license.
 
 The goal is to provide a production-ready XWiki system running in Docker. This why:
 * The OS is based on Debian and not on some smaller-footprint distribution like Alpine
-* Several containers are used with Docker Compose: one for the DB and another for XWiki + Servlet container. This 
+* Several containers are used with Docker Compose: for the DB, XWiki + Servlet, NGINX and Let's Encrypt. This 
   allows the ability to run them on different machines for example. 
 
 # Using
@@ -19,12 +19,8 @@ The goal is to provide a production-ready XWiki system running in Docker. This w
 You should first install [Docker](https://www.docker.com/) on your machine.
 
 * Install Git and run `git clone https://github.com/xwiki-contrib/docker-xwiki.git` or download the sources from
-the GitHub UI. Then choose the branch or tag that you wish to use:
-  * The `master`branch will get you the latest released version of XWiki
-  * The `8.x` branch will get you the latest released version of XWiki for the 8.x cycle
-  * The `8.4.4` tag will get you exactly XWiki 8.4.4.
-  * etc.
-* Go to the directory corresponding to the configuration you wish to build, for example: `cd xwiki-mysql-tomcat`.
+the GitHub UI.
+* Go to the directory with the configuration file: `cd xwiki-mysql-tomcat`.
 * Run `docker-compose up` 
 * Start a browser and point it to `http://localhost:8080`
 
@@ -49,11 +45,11 @@ executed in the container to setup some configuration. The following environment
 ## Miscellaneous
 
 Volumes:
-* Two volumes are created:
+* Three volumes are created:
   * A volume named `<prefix>_mysql-data` that contains the database data.
+  * A volume named `<prefix>_tomcat-data` that contains the tomcat server data.
   * A volume named `<prefix>_xwiki-data` that contains XWiki's permanent directory.
 * To find out where those volumes are located on your local host machine you can inspect them with `docker volume inspect <volume name>`. To find the volume name, you can list all volumes with `docker volume ls`. 
-* Note that on Mac OSX, Docker runs inside the xhyve VM and thus the paths you get when inspecting the volumes are relative to this. Thus, you need to get into that VM if you need to access the volume data. 
 
 MySQL:
 * To issue some mysql commands:
