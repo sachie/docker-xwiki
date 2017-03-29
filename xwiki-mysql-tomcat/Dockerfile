@@ -30,6 +30,7 @@ ENV XWIKI_VERSION=8.4.4 \
 
 # Install Java8 + Tomcat + LibreOffice + other tools
 RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/sources.list.d/backports.list && \
+  echo "deb http://ftp.us.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list.d/stretch.list && \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get --no-install-recommends -y --force-yes install \
